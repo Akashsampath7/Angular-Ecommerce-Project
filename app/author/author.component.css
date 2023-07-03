@@ -1,0 +1,35 @@
+
+  .product-box {
+    display: flex;
+    width: 350px;
+    height: 350px;
+    border-color: #ac6969;
+    border: 2px solid rgb(107, 84, 84);
+    border-radius: 12px;
+    padding: 5px;
+    margin-left: 40%;
+    margin: 0 auto;
+  }
+  
+  .product-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .product-box th, .product-box td {
+    padding: 4px 8px; /* Adjusted padding values */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-box th {
+    background-color: #f2f2f2;
+  }
+ 
+  .texa {
+    background-image: url('../../assets/top-view-desk-concept-with-tablet_23-2148236862.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+  }

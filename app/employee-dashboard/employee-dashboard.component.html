@@ -1,0 +1,199 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+<div class="test">    
+<h1 class="topic" style="font-size: 25px; font-family:serif;"><i class="fa fa-user-graduate" style='font-size:36px'></i> STUDENT REGISTRATION PORTAL</h1>
+<div class="admin-name" [matMenuTriggerFor]="userRoleDropdownMenu">
+  <button mat-icon-button [matMenuTriggerFor]="userRoleDropdownMenu" style="display: flex;">
+    <div class="user-row">
+      <img src="../../assets/user-logo.png" class="user-logo"><u style="color: #4e2409;">{{userRole}}</u>
+    </div>  
+  </button>
+</div>
+  <div>
+  <mat-menu #userRoleDropdownMenu="matMenu"  style="text-align: center;">
+    <div class="role-image"><img src="../../assets/user-logo.png" alt="A beautiful image" width="140" height="140" title="Click to enlarge"><br>
+    </div>
+    <div style="text-align: center;"> <h1 style="font-family:'Courier New', Courier, monospace; font-size: large;">{{userRole}}</h1> <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">{{fullname}}</h1></div>
+<div style="text-align: center;">
+      <button (click)="clickAddEmployee()" [hidden]="isDisabled" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" style="font-family: 'Times New Roman', Times, serif;"> <i class="fas fa-plus-circle"></i> Add Student Details</button>
+    </div> <br>
+    <button routerLink="/userdetails" class="btn btn-info" style="font-family: 'Times New Roman', Times, serif; margin-left: 15px;"> User Details <i class='fas fa-info-circle'></i></button>
+    <button routerLink="/homepage" class="btn btn-danger mx-3" style="font-family: 'Times New Roman', Times, serif;">LogOut <i class="fas fa-sign-out-alt"></i></button>
+  </mat-menu>
+</div>
+
+
+<div>
+  <style>
+    .profile-cell {
+        width: 1%;
+        white-space: nowrap;
+    }
+    .table-striped tbody tr:nth-child(even) {
+    background-color: #7a53b9;
+  }
+</style>
+<br>
+
+<div class="container text-center">
+  <table class="table mt-3 table-striped table-bordered">
+    <tbody>
+      <tr>
+        <th scope="col" class="header-cell" style="background-color: #8ce9f3;">Student ID</th>
+        <th scope="col" class="header-cell" style="background-color: #8ce9f3;">Profile</th>
+        <th scope="col" class="header-cell" style="background-color: #8ce9f3;">First Name</th>
+        <th scope="col" class="header-cell" style="background-color: #8ce9f3;">Last Name</th>
+        <th scope="col" class="header-cell" style="background-color: #8ce9f3;">Email ID</th>
+        <th scope="col" class="header-cell" style="background-color: #8ce9f3;">Mobile No</th>
+        <th scope="col" class="header-cell" style="background-color: #8ce9f3;">Action</th>
+      </tr>
+      
+      <tr *ngFor="let row of displayedData; let i = index" [ngClass]="i % 2 === 0 ? 'even-row' : 'odd-row'">
+        <td>{{ row.id }}</td>
+        <td class="profile-cell">
+          <img [src]="row.profile" style="height: 10%; width: 70%;" alt="User Picture" />
+        </td> 
+        <td>{{ row.firstName }}</td>
+        <td>{{ row.lastName }}</td>
+        <td>{{ row.email }}</td>
+        <td>{{ row.mobile }}</td>
+        <td style="padding: 1;">
+          <button (click)="onEdit(row)" [hidden]="isDisabledEdit" class="btn btn-info" type="button"
+            data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="fas fa-edit"></i>  Edit</button>&nbsp;
+          <button (click)="deleteEmployee(row)" [hidden]="isDisabled" class="btn btn mx-3" style="background-color: #f06868;"> <i class="fas fa-trash"></i> Delete</button>&nbsp;
+          <a routerLink="/employee1" (click)="viewEmployee(row)" class="btn btn-primary"> <i class="fas fa-eye"></i> View</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination-box">
+    
+      <button (click)="previousPage()" [disabled]="currentPage === 1" style="margin-left: 0px; background-color: #addbe9; border-radius: 12px; height: 30px; width: 75px;">
+        <i class='fas fa-backward'></i> Back
+      </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <div class="total-details"><b>Total Details:{{ totalDetails }}</b></div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= totalDetails" style="  background-color: #a1dde7; border-radius: 12px; height: 30px; width: 75px;">
+        <i class='fas fa-forward'></i> Next 
+      </button>
+  </div>
+</div>
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content formimage" >
+        <div class="modal-header">
+          <div id="exampleModalLabel" class="formHeading"><i class="fa fa-graduation-cap"></i><b>STUDENT DETAILS</b></div>
+          <div><button type="button" class="btn-close" style="background-color: #ff0a0a;" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formValue">
+              <!-- First Name -->
+              <div>
+                <label for="firstName" class="form-label" style="font-weight: bold;">First Name :<a style="color: #ff0a0a;"><b>*</b></a></label>
+                <input type="text" formControlName="firstName" class="form-control custom-border" id="firstName" aria-describedby="firstName" placeholder="Enter your First Name">
+                <div *ngIf="formValue.get('firstName').errors" class="text-danger">
+                  <div *ngIf="formValue.get('firstName').invalid && formValue.get('firstName').touched" class="text-danger">
+                    First name is required.</div>
+                  <div *ngIf="formValue.get('firstName').hasError('capitalizeFirstLetter')">First letter should be capitalized.</div>
+                </div>  
+                <!-- Last Name  -->
+                <br>
+                <label for="lastName" class="form-label" style="font-weight: bold;">Last Name :<a style="color: #ff0a0a;"><b>*</b></a></label>
+                    <input type="text" formControlName="lastName" class="form-control custom-border" id="lastName" placeholder="Enter your Last Name">
+                    <div *ngIf="formValue.get('lastName').errors" class="text-danger">
+                    <div *ngIf="formValue.get('lastName').invalid && formValue.get('lastName').touched" class="text-danger">
+                      Last name is required.</div>
+                    <div *ngIf="formValue.get('lastName').hasError('capitalizeFirstLetter')">First letter should be capitalized.</div>
+                  </div>
+                </div><br>
+                <!-- Email Id -->
+                <div>
+                  <label for="email" class="form-label" style="font-weight: bold;">Email ID :<a style="color: #ff0a0a;"><b>*</b></a></label>
+                    <input type="text" formControlName="email" class="form-control custom-border" id="email" placeholder="Enter your Email">
+                    <div *ngIf="formValue.get('email').invalid && formValue.get('email').touched" class="text-danger">
+                      Email is required.</div>
+                      <div *ngIf="emailExistsError" class="text-danger" style="font-family: 'Times New Roman', Times, serif;">
+                        Email already exists.
+                      </div>
+                  </div>
+                  <br>
+                  <!-- Mobile Number -->
+                  <div>
+                    <label for="mobile" class="form-label" style="font-weight: bold;">Mobile No :<a style="color: #ff0a0a;"><b>*</b></a></label>
+                    <input type="text" formControlName="mobile" class="form-control custom-border" id="mobile" pattern="[0-9]{10}" required placeholder="Enter your Mobile Number">
+                    <div *ngIf="formValue.get('mobile').invalid && formValue.get('mobile').touched" class="text-danger">
+                      Mobile number must be exactly 10 digits.</div>
+                  </div><br>
+                <!-- Father Name -->
+                  <div>
+                    <label for="fatherName" class="form-label" style="font-weight: bold;">Father Name :<a style="color: #ff0a0a;"><b>*</b></a></label>
+                      <input type="text" formControlName="fatherName" class="form-control custom-border" id="fatherName"  placeholder="Enter your Father Name">
+                    <div *ngIf="formValue.get('fatherName').errors" class="text-danger">
+                      <div *ngIf="formValue.get('fatherName').invalid && formValue.get('fatherName').touched" class="text-danger">
+                        Father name is required.</div>
+                      <div *ngIf="formValue.get('fatherName').hasError('capitalizeFirstLetter')">First letter should be capitalized.</div>
+                    </div><br>
+                    <!-- Mother Name  -->
+                    <label for="motherName" class="form-label" style="font-weight: bold;">Mother Name :<a style="color: #ff0a0a;"><b>*</b></a></label>
+                      <input type="text" formControlName="motherName" class="form-control custom-border" id="motherName"  placeholder="Enter your Mother Name">
+                    <div *ngIf="formValue.get('motherName').errors" class="text-danger">
+                      <div *ngIf="formValue.get('motherName').invalid && formValue.get('motherName').touched" class="text-danger">
+                        Mother name is required.</div>
+                      <div *ngIf="formValue.get('motherName').hasError('capitalizeFirstLetter')">First letter should be capitalized.</div>
+                    </div> 
+                  </div><br>
+                  <!-- Address -->
+                  <div>
+                    <label for="address" class="form-label" style="font-weight: bold;">Address :</label>
+                    <input type="text" formControlName="address" class="form-control custom-border" id="address"  placeholder="Enter your Address">
+                  </div><br>
+                   <!-- Date of Birth -->
+                   <div>
+                    <label for="dob" style="font-weight: bold;">Date of Birth :<a style="color: red;">*</a>
+                    <input type="date" formControlName="dob" class="form-control" id="dob" name="dob" required [max]="maxDate" (change)="filterClassesByAge()">
+                  </label>  &nbsp;
+                  <div *ngIf="formValue.get('dob').invalid && formValue.get('dob').touched" class="text-danger">
+                    Date of Birth is required.</div>
+                     <!-- Class -->
+                  <label for="classlist" style="font-weight: bold;">Class :</label>&nbsp;
+                  <select id="classlist" formControlName="classlist">
+                    <option *ngFor="let classValue of filteredClasses" [value]="classValue" [selected]="classValue === selectedClass">{{ classValue }}</option>
+                  </select></div>&nbsp;
+                  <!-- Gender -->
+                  <div>
+                    <label for="gender"style="font-weight: bold;">Gender :</label>&nbsp;
+                    <select id="gender" formControlName="gender">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select> &nbsp;
+                    <label for="bloodgroup"style="font-weight: bold;">Blood group :</label>&nbsp;
+                    <select id="bloodgroup" formControlName="bloodgroup">
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                    </select> 
+                  </div><br>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-window-close"></i> Close</button>
+          <button type="button" *ngIf="showAdd" [disabled]="formValue.invalid" [disabled]="!isPhoneNumberValid" (click)="postEmployeeDetails()" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add 
+          </button>
+          <button type="button" *ngIf="showUpdate" (click)="updateEmployeeDetails()" [disabled]="formValue.invalid" [disabled]="!isMobileModified" class="btn btn-primary"> <i class="fas fa-edit"></i> Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

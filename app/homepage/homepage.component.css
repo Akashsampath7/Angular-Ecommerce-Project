@@ -1,0 +1,66 @@
+
+.product-box {
+    display: flex;
+    width: 350px;
+    height: 470px;
+    border-color: #ac6969;
+    border: 2px solid rgb(107, 84, 84);
+    border-radius: 12px;
+    padding: 5px;
+    margin-left: 40%;
+    margin: 0 auto;
+  }
+  
+  .product-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .product-box th, .product-box td {
+    padding: 4px 8px; /* Adjusted padding values */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-box th {
+    background-color: #f2f2f2;
+  }
+
+  .background-image {
+    background-image: url('../homepage/MicrosoftTeams-image.png');
+    background-size: cover;
+    height: 100vh;
+  }
+  
+  .center-button {
+    display: block;
+    margin: 0 auto;
+    width: 770px;
+    background-color: rgb(235, 230, 124);
+    border-radius: 12px;
+    color: rgb(69, 106, 106);
+
+}
+
+.alin{
+  display: flex;
+  
+}
+.text{
+  width: 500px;
+font-size: x-large;
+font-family: cursive;
+margin-left: 270px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: small;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}

@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="test">
+  <div>
+    <h1 style="text-align: center; font-size: 48px; color: rgb(66, 137, 198); font-size: 25px; font-family:serif;">
+      <i class="fa fa-user-graduate" style="font-size:36px;"></i> STUDENT REGISTRATION PORTAL
+    </h1>
+
+    <div class="card">
+      <div class="text-center">
+        <h1 style="font-family: 'Times New Roman', Times, serif;">Login</h1>
+        <h6 style="font-family: 'Times New Roman', Times, serif;">Please enter Fullname & Password !!</h6>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="mb-3">
+          <br>
+          <div class="input-with-icon">
+            <i class="fa fa-user" style="font-size: 30px;"></i>&nbsp;
+            <input [(ngModel)]="fullname" formControlName="email" type="email"
+              class="form-control custom-border" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Enter your Fullname" style="background-color: #eef6f8; font-family: 'Times New Roman', Times, serif;">
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="input-with-icon">
+            <i class="fa fa-lock" style="font-size: 30px;"></i>&nbsp;
+            <input [(ngModel)]="password" formControlName="password" [type]="passwordVisible ? 'text' : 'password'"
+              class="form-control custom-border" id="exampleInputPassword1" placeholder="Enter your Password"
+              style="background-color: #eef6f8; font-family: 'Times New Roman', Times, serif;">
+            <span class="password-toggle-icon" (click)="togglePasswordVisibility()">
+              <i class="fa" [class.fa-eye]="passwordVisible" [class.fa-eye-slash]="!passwordVisible"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="loginForm.invalid && (loginForm.get('email')?.touched || loginForm.get('password')?.touched)" class="text-danger" style="text-align: center;">
+          Please enter your Fullname and Password
+        </div>
+        <div class="text-center">
+          <button style="color: #ffffff; font-family: 'Times New Roman', Times, serif;" type="submit"
+            class="btn btn-primary">Login</button>
+        </div>
+      </form>
+      <a style="color: #363333; margin-top: 10px; font-family: 'Times New Roman', Times, serif; text-align: center;"
+        routerLink="/signup">New user? Click to signup!!</a>
+    </div>
+  </div>
+  <button class="back-button-container" routerLink="/homepage" style="font-family: 'Times New Roman', Times, serif;"><i
+      class="fas fa-arrow-left"></i> Back</button>
+</div>

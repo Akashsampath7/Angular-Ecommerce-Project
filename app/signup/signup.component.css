@@ -1,0 +1,65 @@
+.card{
+    border: none;
+    width: 500px;
+    padding: 40px;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background:rgb(176, 189, 199);
+    background: linear-gradient(270deg, rgb(176, 215, 220) 30%, rgb(36, 152, 198) 100%);
+   margin-top: -150px;
+}
+
+.card h1,h6{
+    color: rgb(0, 0, 0);
+}
+
+label{
+    color: aliceblue;
+}
+ 
+.test {
+    background-image: url('../login/bokeh-background_23-2148486863.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  height: 165vh;
+  top: 5px;
+  }
+
+  .back-button-container {
+    position: absolute;
+      top: 5px;
+      left: 5px;
+      height: 40px;
+      width: 70px;
+      color: rgb(255, 255, 255);
+      background-color: #76797b ;
+      border-radius: 10px;
+  }
+
+.custom-border {
+    border-color: rgb(0, 0, 0);
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  left: 0px;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.password-toggle-icon i {
+  background-color: transparent;
+  border: none;
+}
+

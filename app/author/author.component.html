@@ -1,0 +1,50 @@
+<style>
+  .texa {
+    background-image: url('../../assets/top-view-desk-concept-with-tablet_23-2148236862.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+  }
+</style>
+
+<div class="texa">
+  <br>
+  <div class="container-fluid">
+    <h1 style="text-align: center;"><u>Admin Detail</u></h1>
+    <div class="d-flex justify-content-end">
+      <button routerLink="/homepage" class="btn btn-danger">LogOut</button>
+    </div>
+  </div>
+  
+<br><br>
+<div class="product-box" style="background-color: rgb(223, 223, 146);">
+    <table>
+        <tbody style="background-color: rgb(226, 220, 189);">
+            <tr>
+                <td><p class="adminimage"><b>Profile: </b></p></td>
+                <td ><img style="height: 150px;" [src]="adminPhotoUrl" alt="Admin Photo"></td>
+              </tr>
+          <tr>
+            <td><b>Full Name: </b></td>
+            <td>admin</td>
+          </tr>
+          <tr>
+            <td><b>Email ID: </b></td>
+            <td>admin@gmail.com</td>
+          </tr>
+          <tr>
+            <td><b>Mobile Number: </b></td>
+            <td>8976859678</td>
+          </tr>
+          <tr>
+            <td><b>Dashboard url: </b></td>
+            <td><button style="background-color: rgb(216, 172, 113); border-radius: 40px; border-inline:unset;" (click)="navigateToDashboard()">Go to Dashboard</button></td><br><br><br>
+            
+
+          </tr>
+          
+        </tbody>
+      </table>
+</div><br><br><br>
+</div>

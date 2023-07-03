@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="test">
+    
+  <h1 class="topic"><i class="fa fa-user-graduate" style='font-size:36px'></i> USER DETAILS</h1>
+  <div class="admin-name" [matMenuTriggerFor]="userRoleDropdownMenu">
+    <button mat-icon-button [matMenuTriggerFor]="userRoleDropdownMenu" style="display: flex;">
+      <div class="user-row">
+        <img src="../../assets/user-logo.png" class="user-logo"><u style="color: #4e2409;">{{userRole}}</u>
+      </div>
+    </button>
+<div>
+    <mat-menu #userRoleDropdownMenu="matMenu"  style="text-align: center;">
+      <div class="role-image" ><img src="../../assets/user-logo.png" alt="A beautiful image" width="140" height="140" title="Click to enlarge"><br>
+       
+      </div>
+      <div style="text-align: center;"> <h1 style="font-family:'Courier New', Courier, monospace; font-size: large;">{{userRole}}</h1> <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">{{fullname}}</h1></div>
+      <button routerLink="/homepage" class="btn btn-danger mx-3">LogOut <i class="fas fa-sign-out-alt"></i></button>
+    </mat-menu>
+  </div>
+  </div>
+
+  <br>
+<div class="container">
+  <div>
+    <div class="admin-name">{{ adminName }}</div>
+
+    <div *ngIf="employeeData && employeeData.length > 0">
+      <div class="table-container">
+        <table class="table mt-3 table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" class="header-cell">ID</th>
+              <th scope="col" class="header-cell">Fullname</th>
+              <th scope="col" class="header-cell">Role</th>
+              <th scope="col" class="header-cell">Email ID</th>
+              <th scope="col" class="header-cell">Mobile No</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let employee of employeeData; let i = index" [ngClass]="i % 2 === 0 ? 'even-row' : 'odd-row'">
+              <td>{{ employee.id }}</td>
+              <td>{{ employee.fullname }}</td>
+              <td>{{ getRoleName(employee.role)}}</td>
+              <td>{{ employee.email }}</td>
+              <td>{{ employee.mobile }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="!employeeData || employeeData.length === 0">
+      <p>No admin user details found.</p>
+    </div>
+
+    <div>
+      <button class="backbutton" routerLink="/dashboard"><i class="fas fa-arrow-left"></i> Back</button>
+    </div>
+  </div>
+</div>
+</div>

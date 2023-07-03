@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="background-image">
+
+  <h1 class="topic"><i class="fa fa-user-graduate" style='font-size:36px'></i> STUDENT DETAILS</h1>
+  <div class="admin-name" [matMenuTriggerFor]="userRoleDropdownMenu">
+    <button mat-icon-button [matMenuTriggerFor]="userRoleDropdownMenu" style="display: flex;">
+      <div class="user-row">
+        <img src="../../assets/user-logo.png" class="user-logo"><u style="color: #4e2409;">{{userRole}}</u>
+      </div>  
+    </button>
+<div>
+    <mat-menu #userRoleDropdownMenu="matMenu"  style="text-align: center;">
+      <div class="role-image" ><img src="../../assets/user-logo.png" alt="A beautiful image" width="140" height="140" title="Click to enlarge"><br>
+       
+      </div>
+      <div style="text-align: center;"> <h1 style="font-family:'Courier New', Courier, monospace; font-size: large;">{{userRole}}</h1> <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">{{fullname}}</h1></div>
+      <button routerLink="/homepage" class="btn btn-danger mx-3" style="font-family: 'Times New Roman', Times, serif;">LogOut <i class="fas fa-sign-out-alt"></i></button>
+    </mat-menu>
+  </div>
+  </div>
+
+  <div class="employee-details-container" *ngIf="selectedEmployee"> 
+    <div class="employee-details-box">
+      <div class="profile-circle">
+      <img [src]="selectedEmployee.profile" alt="Employee Profile" style="height: 100px; width: 100px;">
+    </div>
+        <br><br>
+      <b> Full Name : </b>{{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }} 
+        <br>
+      <strong>Student ID: </strong>{{ selectedEmployee.id }}
+        <br><br>
+      <button class="btn btn-primary" (click)="generatePDF()">
+        <i class="fas fa-download"></i> Download 
+      </button> &nbsp;&nbsp;
+      <button class="backbutton" routerLink="/dashboard">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+  </div>
+</div>
+  
+  <div class="employee-details-containers" *ngIf="selectedEmployee">
+    <div class="employee-details-boxs">
+      <table class="employee-details-table">
+        <p style="text-align: left;"><i class='fas fa-layer-group'></i> <b> Student Information</b></p>
+        <tr>
+          <td><strong>Email ID</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.email }}</td>
+        </tr>
+        <tr>
+          <td><strong>Mobile No</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.mobile }}</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Father Name</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.fatherName }}</td>
+        </tr>
+        <tr>
+          <td><strong>Mother Name</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.motherName }}</td>
+        </tr>
+        <tr>
+          <td><strong>Address</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.address }}</td>
+        </tr>
+        <tr>
+          <td><strong>Class</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.classlist }}</td>
+        </tr>
+        <tr>
+          <td><strong>Date of Birth</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.dob }}</td>
+        </tr>
+        <tr>
+          <td><strong>Gender</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.gender }}</td>
+        </tr>
+        <tr>
+          <td><strong>Blood Group</strong></td>
+          <td>:</td>
+          <td>{{ selectedEmployee.bloodgroup }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+

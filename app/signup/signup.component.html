@@ -1,0 +1,115 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="test">
+  <h1 style="text-align: center; font-size: 25px; color: rgb(66, 137, 198);  font-family: serif;"><i class="fa fa-user-graduate" style='font-size:36px'></i> STUDENT REGISTRATION PORTAL</h1>
+  <div class="card">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="text-center">
+          <h1 style="font-family: 'Times New Roman', Times, serif;">Sign Up</h1>
+          <h6 style="font-family: 'Times New Roman', Times, serif;">Register Yourself!!</h6>
+        </div>
+        <br>
+        
+        <form>
+          <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+            <!-- Role -->
+            <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select class="custom-border" id="role" formControlName="role" [class.is-invalid]="signupForm.get('role').invalid && signupForm.get('role').touched"
+              style="width: 120px; border-radius: 20px; height: 30px; text-align: center; color: aliceblue; background-color: rgb(93, 138, 148);"
+              (change)="onRoleChange()">
+              <option value="">Select a role</option>
+              <option value="02">Teacher</option>
+              <option value="03">Student</option>
+            </select>
+              <div *ngIf="signupForm.get('role').invalid && signupForm.get('role').touched" class="text-danger" style="font-family: 'Times New Roman', Times, serif;">
+                Role selection is required.
+              </div>
+            </div><br>
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label" style="font-weight: bold; color: #000000; font-family: 'Times New Roman', Times, serif;">Full Name: <a style="color: red;">*</a></label>
+              <input formControlName="fullname" type="text" class="form-control custom-border" id="exampleInputPassword1" placeholder="Enter your Fullname" style="background-color: #ffffff; font-family: 'Times New Roman', Times, serif;">
+              <div *ngIf="signupForm.get('fullname').errors" class="text-danger">
+              <div *ngIf="signupForm.get('fullname').invalid && signupForm.get('fullname').touched" class="text-danger" style="font-family: 'Times New Roman', Times, serif;">
+                Full name is required.</div>
+              <div *ngIf="signupForm.get('fullname').hasError('capitalizeFirstLetter')" style="font-family: 'Times New Roman', Times, serif;">Full Name must start with an uppercase letter.</div>
+              </div>
+            </div>
+            <!-- Mobile Number -->
+            <div class="mb-3">
+              <label for="mobile" class="form-label" style="font-weight: bold; color: #000000; font-family: 'Times New Roman', Times, serif;" >Mobile No: <a style="color: red;">*</a></label>
+              <input type="text" formControlName="mobile" class="form-control custom-border" id="mobile" pattern="[0-9]{10}" required placeholder="Enter your Mobile Number" style="font-family: 'Times New Roman', Times, serif;">
+              <div *ngIf="signupForm.get('mobile').invalid && signupForm.get('mobile').touched" class="text-danger" style="font-family: 'Times New Roman', Times, serif;">
+                Mobile number is required.</div>
+            </div>
+            <!-- Email Id -->
+            
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label" style="font-weight: bold; color: #000000; font-family: 'Times New Roman', Times, serif;">Email address: <a style="color: red;">*</a></label>
+              <input formControlName="email" type="email" class="form-control custom-border" id="exampleInputEmail1" placeholder="Enter your Email">
+              <div *ngIf="signupForm.get('email').invalid && signupForm.get('email').touched" class="text-danger">
+                Please enter a valid email address.
+              </div>
+              <div *ngIf="emailExistsError" class="text-danger" style="font-family: 'Times New Roman', Times, serif;">
+                Email already exists.
+              </div>
+            </div>
+            <!-- Password -->
+            <div>
+              <label for="exampleInputPassword1" class="form-label" style="font-weight: bold; color: #000000; font-family: 'Times New Roman', Times, serif;">Password: <a style="color: red;">*</a></label>
+              <div class="input-with-icon">
+              <input type="{{ passwordVisible ? 'text' : 'password' }}" class="form-control custom-border" id="password" formControlName="password" required placeholder="Enter your Password" style="font-family: 'Times New Roman', Times, serif;">
+              <span class="password-toggle-icon" (click)="togglePasswordVisibility()">
+                <i class="fa" [class.fa-eye]="passwordVisible" [class.fa-eye-slash]="!passwordVisible"></i>
+              </span>
+            </div>
+              <div *ngIf="signupForm.get('password').errors && (signupForm.get('password').dirty || signupForm.get('password').touched)" class="text-danger" style="font-family: 'Times New Roman', Times, serif;">
+                <div *ngIf="signupForm.get('password').errors['required']">
+                  Password is required.
+                </div>
+                <div *ngIf="signupForm.get('password').errors['passwordComplexity']" style="font-family: 'Times New Roman', Times, serif;">
+                  Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+                </div>
+              </div>
+              </div> &nbsp;
+            <!-- Degree -->
+            <div *ngIf="selectedRole === '02'">
+              <div class="mb-3">
+              <label for="degree" class="form-label" style="font-weight: bold; color: #000000; font-family: 'Times New Roman', Times, serif;">Degree: <a style="color: red;">*</a></label>
+              <input formControlName="degree" type="text" class="form-control custom-border" id="degree" placeholder="Enter your Degree" style="background-color: #ffffff; font-family: 'Times New Roman', Times, serif;">
+              <div *ngIf="signupForm.get('degree').invalid && signupForm.get('degree').touched" class="text-danger">
+              Degree is required.
+              </div>
+              </div>
+            </div>
+            <!-- Date of Birth -->
+            <div *ngIf="selectedRole === '03'">
+            <div class="mb-3">
+              <label for="dob" class="form-label">Date of Birth:</label>
+              <input formControlName="dob" type="date" class="form-control" id="dob" required [max]="maxDate" (change)="filterClassesByAge()">
+              <div *ngIf="signupForm.get('dob').invalid && signupForm.get('dob').touched" class="text-danger">
+              Date of Birth is required.
+            </div><br>
+            <!-- Class -->
+              <label for="classlist" style="font-weight: bold;">Class :</label>&nbsp;
+              <select id="classlist" formControlName="classlist">
+              <option *ngFor="let classValue of filteredClasses" [value]="classValue" [selected]="classValue === selectedClass">{{ classValue }}</option>
+              </select>
+            </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="text-center">
+            <button type="submit" class="btn btn-primary mb-2" [disabled]="signupForm.invalid || signupForm.pristine" style="font-family: 'Times New Roman', Times, serif;">Sign up</button>
+            </div>
+          </form>
+          <div class="text-center">
+          <a style="color: #000000; margin-top: 10px; font-family: 'Times New Roman', Times, serif; text-align: center;" routerLink="/login">Already registered? Click to login!!</a>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button class="back-button-container" routerLink="/homepage" style="font-family: 'Times New Roman', Times, serif;"><i class="fas fa-arrow-left"></i> Back</button>
+  </div>
